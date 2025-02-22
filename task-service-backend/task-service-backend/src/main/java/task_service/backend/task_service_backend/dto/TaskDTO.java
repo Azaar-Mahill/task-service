@@ -1,30 +1,15 @@
-package task_service.backend.task_service_backend.entity;
+package task_service.backend.task_service_backend.dto;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-@Entity
-@Table(name = "tasks")
-public class Task {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TaskDTO {
     private Long taskId;
-
-    @Column(nullable = false)
     private String taskTitle;
-
-    @Column(nullable = false)
     private String taskDescription;
-
-    @Column(nullable = false)
     private String createOn;
 
-    public Task() {
+    public TaskDTO() {
     }
 
-    public Task(Long taskId, String taskTitle, String taskDescription, String createOn) {
+    public TaskDTO(Long taskId, String taskTitle, String taskDescription, String createOn) {
         this.taskId = taskId;
         this.taskTitle = taskTitle;
         this.taskDescription = taskDescription;
@@ -62,10 +47,6 @@ public class Task {
     public void setCreateOn(String createOn) {
         this.createOn = createOn;
     }
-
-    @PrePersist
-    protected void onCreate() {
-        this.createOn = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-    }
 }
+
 
