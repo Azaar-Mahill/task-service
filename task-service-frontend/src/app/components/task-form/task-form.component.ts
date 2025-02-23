@@ -16,7 +16,7 @@ export class TaskFormComponent {
 
   addTask() {
     if (this.title && this.description) {
-      this.taskService.addTask({ taskTitle: this.title, taskDescription: this.description, taskId: null, createOn: null});
+      this.taskService.addTask({ taskTitle: this.title, taskDescription: this.description});
       this.title = '';
       this.description = '';
     }

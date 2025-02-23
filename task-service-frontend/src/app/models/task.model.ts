@@ -1,6 +1,13 @@
 export interface Task {
-  taskId: number|null;          
+  taskId: number;          
   taskTitle: string;       
   taskDescription: string; 
-  createOn: string|null;        
+  createOn: string;        
+}
+
+export interface Task2 {
+         
+  taskTitle: string;       
+  taskDescription: string; 
+     
 }

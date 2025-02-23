@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { Task } from '../models/task.model';
+import { Task, Task2 } from '../models/task.model';
 
 import { API_ENDPOINTS } from '../config/api-endpoints'; 
 
@@ -26,9 +26,15 @@ export class TaskService {
   }
 
   // Add a new task (optional: can be extended to send to backend)
-  addTask(task: Task) {
-    const updatedTasks = [...this.tasks.value, task];
-    this.tasks.next(updatedTasks);
+  addTask(task: Task2) {
+    const apiUrl = API_ENDPOINTS.ADD_TASK;
+  
+    this.http.post<Task>(apiUrl, task).subscribe(
+      (newTask) => {
+        this.fetchRecentTasks();
+      },
+      (error) => console.error('Error adding task:', error)
+    );
   }
 
   // Mark a task as done (Delete task from backend)
@@ -37,8 +43,7 @@ export class TaskService {
 
     this.http.delete(deleteUrl, { responseType: 'text' }).subscribe(
       (response) => {
-        const updatedTasks = this.tasks.value.filter(t => t.taskId !== task.taskId);
-        this.tasks.next(updatedTasks);
+        this.fetchRecentTasks();
       },
       (error) => console.error('Error deleting task:', error)
     );
