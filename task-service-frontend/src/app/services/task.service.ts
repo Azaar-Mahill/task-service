@@ -31,11 +31,17 @@ export class TaskService {
     this.tasks.next(updatedTasks);
   }
 
-  // Mark a task as done
-  markTaskAsDone(index: number) {
-    const updatedTasks = this.tasks.value.map((task, i) =>
-      i === index ? { ...task, completed: true } : task
+  // Mark a task as done (Delete task from backend)
+  markTaskAsDone(task: Task) {
+    const deleteUrl = API_ENDPOINTS.DELETE_TASK+`${task.taskId}`;
+
+    this.http.delete(deleteUrl, { responseType: 'text' }).subscribe(
+      (response) => {
+        const updatedTasks = this.tasks.value.filter(t => t.taskId !== task.taskId);
+        this.tasks.next(updatedTasks);
+      },
+      (error) => console.error('Error deleting task:', error)
     );
-    this.tasks.next(updatedTasks);
   }
+
 }

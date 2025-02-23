@@ -9,6 +9,7 @@ import task_service.backend.task_service_backend.service.TaskServiceInterface;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {

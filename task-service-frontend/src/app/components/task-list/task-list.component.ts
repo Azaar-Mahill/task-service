@@ -17,8 +17,8 @@ export class TaskListComponent {
     this.taskService.tasks$.subscribe(tasks => (this.tasks = tasks));
   }
 
-  markAsDone(index: number) {
-    this.taskService.markTaskAsDone(index);
+  markAsDone(task: Task) {
+    this.taskService.markTaskAsDone(task);
   }
 
 }

@@ -1,6 +1,6 @@
 export interface Task {
-    taskTitle: string;
-    taskDescription: string;
-    completed: boolean;
-  }
-  
+  taskId: number|null;          
+  taskTitle: string;       
+  taskDescription: string; 
+  createOn: string|null;        
+}
