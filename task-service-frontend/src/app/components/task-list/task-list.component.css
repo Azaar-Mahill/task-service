@@ -1,0 +1,60 @@
+.task-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    max-height: 600px; /* Adjust height as needed */
+    overflow-y: auto; /* Enables vertical scrollbar */
+    border: 1px solid #ddd; /* Optional: Adds a border around the scrollable area */
+  }
+  
+  .task-card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .task-card h4 {
+    margin-bottom: 10px;
+  }
+  
+  .task-card p {
+    flex-grow: 1;
+    color: #555;
+  }
+  
+  .task-card button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .task-card button:hover {
+    background-color: #218838;
+  }
+  
+  /* Optional: Custom Scrollbar Styling */
+  .task-list::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .task-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+  .task-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
