@@ -1,0 +1,23 @@
+.task-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+  }
+  
+  .task-container input,
+  .task-container textarea {
+    width: 300px;
+    margin: 10px 0;
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  .task-container button {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
