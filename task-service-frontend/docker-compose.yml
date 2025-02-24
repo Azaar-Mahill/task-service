@@ -1,0 +1,11 @@
+services:
+  task_service_frontend:
+    build: .
+    ports:
+      - "4200:4200"
+    container_name: task_service_frontend_container
+    volumes: # Volume binding
+      - './:/usr/src/app'
+    command: >
+      bash -c "npm start"
+
