@@ -1,0 +1,20 @@
+services:
+  task-service-database:
+    image: mysql:latest
+    container_name: task-service-database-container
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=taskdb-container
+      - MYSQL_USER=root1
+      - MYSQL_PASSWORD=root1
+
+  task-service-database-backend-container:
+    image: task-service-database-backend-container
+    container_name: task-service-database-backend-container
+    ports:
+      - 8080:8080
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - task-service-database
