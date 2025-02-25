@@ -1,9 +1,9 @@
 services:
-  task_service_frontend2:
+  task_service_frontend3:
     build: .
     ports:
       - "4200:4200"
-    container_name: task_service_frontend_container2
+    container_name: task_service_frontend_container3
     volumes: # Volume binding
       - './:/usr/src/app'
     command: >
