@@ -57,4 +57,10 @@
   .task-list::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+
+  .button-group {
+    display: flex;
+    gap: 10px; /* Adds space between buttons */
+  }
+  
   

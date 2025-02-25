@@ -10,14 +10,17 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Import Spinner Module
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { GlobalPopupComponent } from './components/global-popup/global-popup.component'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskFormComponent,
-    TaskListComponent
+    TaskListComponent,
+    GlobalPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; /
     FormsModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule 
+    MatProgressSpinnerModule,
+    BrowserModule, 
+    BrowserAnimationsModule, 
+    MatDialogModule
   ],
   providers: [
     provideClientHydration(withEventReplay()),

@@ -2,6 +2,9 @@
   <div *ngFor="let task of tasks; let i = index" class="task-card">
     <h4>{{ task.taskTitle }}</h4>
     <p>{{ task.taskDescription }}</p>
-    <button (click)="markAsDone(task)">Done</button>
+    <div class="button-group">
+      <button (click)="markAsDone(task)">Done</button>
+      <button (click)="Update(task)">Update</button>
+    </div>
   </div>
 </div>

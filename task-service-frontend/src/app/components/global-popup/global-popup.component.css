@@ -1,0 +1,48 @@
+.task-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  text-align: center;
+}
+
+.task-container input,
+.task-container textarea {
+  width: 300px;
+  margin: 10px 0;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.task-container button {
+  background-color: green;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button-container {
+  display: flex;          /* Align buttons in a row */
+  gap: 10px;              /* Space between buttons */
+}
+
+.button-container button {
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Corrected selector for close button */
+.button-container .close-btn {
+  background-color: red; /* Make the close button red */
+  color: white;          /* White text on the red button */
+}
+
+button:hover {
+  opacity: 0.8;  /* Add a little hover effect */
+}

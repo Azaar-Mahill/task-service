@@ -1,0 +1,9 @@
+<div class="task-container">
+    <h3>Update a Task</h3>
+    <input type="text" [(ngModel)]="title" placeholder="Title">
+    <textarea [(ngModel)]="description" placeholder="Description"></textarea>
+    <div class="button-container">
+        <button (click)="updateTask()">Update</button>
+        <button class="close-btn" (click)="closeDialog()">Close</button> 
+    </div>
+</div>
