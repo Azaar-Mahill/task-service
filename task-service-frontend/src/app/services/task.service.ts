@@ -5,6 +5,8 @@ import { Task, Task2 } from '../models/task.model';
 
 import { API_ENDPOINTS } from '../config/api-endpoints'; 
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +15,7 @@ export class TaskService {
   private tasks = new BehaviorSubject<Task[]>([]);
   tasks$ = this.tasks.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {
     this.fetchRecentTasks();
   }
 
@@ -32,6 +34,7 @@ export class TaskService {
     this.http.post<Task>(apiUrl, task).subscribe(
       (newTask) => {
         this.fetchRecentTasks();
+        this.showSuccessPopup('A task has been added successfully'); 
       },
       (error) => console.error('Error adding task:', error)
     );
@@ -44,9 +47,19 @@ export class TaskService {
     this.http.delete(deleteUrl, { responseType: 'text' }).subscribe(
       (response) => {
         this.fetchRecentTasks();
+        this.showSuccessPopup('A task has been completed successfully'); 
       },
       (error) => console.error('Error deleting task:', error)
     );
+  }
+
+  showSuccessPopup(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      panelClass: ['success-snackbar'], 
+      horizontalPosition: 'end', 
+      verticalPosition: 'top' 
+    });
   }
 
 }

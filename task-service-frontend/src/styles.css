@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.success-snackbar {
+    background-color: rgb(6, 248, 6) !important;
+    color: white !important;
+    margin: 10px; /* Green margin around the snackbar */
+    border: 5px solid rgb(5, 253, 5); /* Optional: to make the margin stand out with a border */
+}
+  
+.success-snackbar .mat-button-wrapper {
+    color: white !important;
+}
+  
+  
