@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class TaskService {
   private tasks = new BehaviorSubject<Task[]>([]);
   tasks$ = this.tasks.asObservable();
+  loadoutDelay = 750;
 
   private loading = new BehaviorSubject<boolean>(false); // Global loader
   loading$ = this.loading.asObservable(); // Observable to track loader state
@@ -45,11 +46,11 @@ export class TaskService {
           this.loading.next(false);
         },
         (error) => {
-          console.error('Error adding task:', error);
+          this.showErrorPopup('Error when adding a task!')
           this.loading.next(false);
         }
       );
-    }, 500); // Add delay before the request
+    }, this.loadoutDelay); // Add delay before the request
   }
 
   markTaskAsDone(task: Task) {
@@ -64,17 +65,26 @@ export class TaskService {
           this.loading.next(false);
         },
         (error) => {
-          console.error('Error deleting task:', error);
+          this.showErrorPopup('Error when completing a task!')
           this.loading.next(false);
         }
       );
-    }, 500);
+    }, this.loadoutDelay);
   }
 
   showSuccessPopup(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 3000,
       panelClass: ['success-snackbar'],
+      horizontalPosition: 'end',
+      verticalPosition: 'top'
+    });
+  }
+
+  showErrorPopup(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      panelClass: ['not-success-snackbar'],
       horizontalPosition: 'end',
       verticalPosition: 'top'
     });
