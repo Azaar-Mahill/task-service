@@ -34,7 +34,7 @@ export class TaskService {
     );
   }
 
-  addTask(task: Task2) {
+  addTask(task: Task2, message: string) {
     const apiUrl = API_ENDPOINTS.ADD_TASK;
     this.loading.next(true);
 
@@ -42,7 +42,7 @@ export class TaskService {
       this.http.post<Task>(apiUrl, task).subscribe(
         (newTask) => {
           this.fetchRecentTasks();
-          this.showSuccessPopup('A task has been added successfully');
+          this.showSuccessPopup(message);
           this.loading.next(false);
         },
         (error) => {
