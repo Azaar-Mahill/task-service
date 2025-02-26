@@ -25,10 +25,11 @@ export class TaskService {
     this.http.get<Task[]>(API_ENDPOINTS.GET_RECENT_TASKS).subscribe(
       (tasks) => {
         this.tasks.next(tasks);
+        this.showSuccessPopup('Tasks have been fetched sucessssfully');
         this.loading.next(false);
       },
       (error) => {
-        console.error('Error fetching tasks:', error);
+        this.showErrorPopup('Error when fetching tasks!')
         this.loading.next(false);
       }
     );
