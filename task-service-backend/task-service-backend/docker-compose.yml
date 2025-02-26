@@ -8,9 +8,9 @@ services:
       - MYSQL_USER=root1
       - MYSQL_PASSWORD=root1
 
-  task-service-database-backend-container:
-    image: task-service-database-backend-container
-    container_name: task-service-database-backend-container
+  task-service-database-backend-container2:
+    image: task-service-database-backend-container2
+    container_name: task-service-database-backend-container2
     ports:
       - 8080:8080
     build:
