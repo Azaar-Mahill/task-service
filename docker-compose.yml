@@ -1,0 +1,46 @@
+services:
+  # Database service
+  task-service-database:
+    image: mysql:latest
+    container_name: task-service-database-container
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=taskdb-container
+      - MYSQL_USER=root1
+      - MYSQL_PASSWORD=root1
+    ports:
+      - "3307:3306"
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+
+  # Backend service with Maven build and jar creation
+  task-service-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: task-service-backend-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      task-service-database:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://task-service-database:3306/taskdb-container
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    restart: always
+
+  # Frontend service
+  task-service-frontend:
+    build:
+      context: ./task-service-frontend
+      dockerfile: Dockerfile
+    container_name: task-service-frontend-container
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./task-service-frontend:/usr/src/app
+    command: bash -c "npm start"
