@@ -12,12 +12,15 @@ export class TaskService {
   private tasks = new BehaviorSubject<Task[]>([]);
   tasks$ = this.tasks.asObservable();
   loadoutDelay = 750;
+  showFetchSucessfulPopup = false;
 
   private loading = new BehaviorSubject<boolean>(false); // Global loader
   loading$ = this.loading.asObservable(); // Observable to track loader state
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {
+    this.showFetchSucessfulPopup = true;
     this.fetchRecentTasks();
+    this.showFetchSucessfulPopup = false;
   }
 
   fetchRecentTasks() {
@@ -25,7 +28,9 @@ export class TaskService {
     this.http.get<Task[]>(API_ENDPOINTS.GET_RECENT_TASKS).subscribe(
       (tasks) => {
         this.tasks.next(tasks);
-        this.showSuccessPopup('Tasks have been fetched sucessssfully');
+        if(this.showFetchSucessfulPopup){
+          this.showSuccessPopup('Tasks have been fetched sucessssfully');
+        }
         this.loading.next(false);
       },
       (error) => {
@@ -42,6 +47,7 @@ export class TaskService {
     setTimeout(() => {
       this.http.post<Task>(apiUrl, task).subscribe(
         (newTask) => {
+          this.showFetchSucessfulPopup = false;
           this.fetchRecentTasks();
           this.showSuccessPopup(message);
           this.loading.next(false);
@@ -61,6 +67,7 @@ export class TaskService {
     setTimeout(() => {
       this.http.delete(deleteUrl, { responseType: 'text' }).subscribe(
         (response) => {
+          this.showFetchSucessfulPopup = false;
           this.fetchRecentTasks();
           this.showSuccessPopup('A task has been completed successfully');
           this.loading.next(false);
