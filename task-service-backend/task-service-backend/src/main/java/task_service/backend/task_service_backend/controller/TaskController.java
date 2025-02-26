@@ -63,7 +63,15 @@ public class TaskController {
 
     @GetMapping("/recent")
     public ResponseEntity<List<TaskDTO>> getLastFiveTasks() {
-        return ResponseEntity.ok(taskService.getLastFiveTasks());
+        try {
+            List<TaskDTO> tasks = taskService.getLastFiveTasks();
+            if (tasks.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(tasks);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 }
 
