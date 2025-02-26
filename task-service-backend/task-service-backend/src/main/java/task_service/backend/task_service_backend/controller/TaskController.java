@@ -23,7 +23,12 @@ public class TaskController {
 
     @GetMapping
     public ResponseEntity<List<TaskDTO>> getAllTasks() {
-        return ResponseEntity.ok(taskService.getAllTasks());
+        try {
+            List<TaskDTO> tasks = taskService.getAllTasks();
+            return ResponseEntity.ok(tasks);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/{id}")
