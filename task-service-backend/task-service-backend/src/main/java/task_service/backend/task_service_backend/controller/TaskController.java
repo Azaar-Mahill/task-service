@@ -43,7 +43,12 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(taskService.createTask(taskDTO));
+        try {
+            TaskDTO createdTask = taskService.createTask(taskDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @DeleteMapping("/{id}")
